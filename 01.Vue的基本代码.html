@@ -1,0 +1,39 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 1</title>
+<!--1.0 导入 vue  这里使用 cdn上的 vue 2.4版本-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <!-- 将来 new 的Vue实例，会控制这个 元素中的所有内容-->
+    <!-- Vue 实例所控制的这个元素区域，就是我们的 V-->
+    <div id="app">
+        <p>{{msg}}</p>
+    </div>
+
+</body>
+<script>
+    // 2.创建 一个 vue的实例
+    // 当我们导入包后，浏览器的内存中，
+    //就多了一个 Vue 构造函数，注意这里相当于一个构造函数 
+    // 我们new 出来的在这个vm对象，就是MVVM的调度者
+    var vm = new Vue({
+        el: '#app',  //表示， 当前我们 new 的这个Vue实例，要控制页面上的哪个区域
+        //data 就是MVVM的M 数据
+        data: {  //data属性中，存放的是 e1中要用到的数据
+            msg: '欢迎学习 Vue' //通过 vue提供的指令，很方便的就能把数据渲染到页面上。
+
+
+        }
+
+
+    })
+    </script>
+
+
+
+</html>

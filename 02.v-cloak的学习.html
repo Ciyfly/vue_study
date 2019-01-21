@@ -1,0 +1,54 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 1</title>
+<!--1.0 导入 vue  这里使用 cdn上的 vue 2.4版本-->
+
+<style>
+    [v-cloak]{
+        display: none;
+    }
+</style>
+</head> 
+
+<body>
+
+
+    <div id="app">
+        <!-- 增加 v-cloak指令，在设置样式默认隐藏-->
+        <!-- 使用 v-cloak 可以解决插值 闪烁的问题-->
+        <!-- 表达式 可以将值放在中间，就是说可以放其他的值。只替换占位符-->
+        <p v-cloak>{{msg}}</p>
+        <!-- 默认 v-text是没有闪烁问题的-->
+        <!-- v-text会覆盖元素中原本的值。-->
+        <h4 v-text="msg"></h4>
+        <!-- v-html 是可以当做html-->
+        <p v-html="msg2"></p>
+        <!-- v-bind 是vue中提供的用于绑定属性的指令  让其认为是变量！！！ 或者说是绑定
+        是将 mytitle当做一个表达式，所以可以加上其他字符串-->
+        <input type="button" value="按钮" v-bind:title="mytitle + '加上其他字符串'">
+        <!-- v-bind 可以简写成 : 要绑定的属性-->
+        <input type="button" value="按钮" :title="mytitle + '简写'">
+    </div>
+
+</body>
+<!--将 vue导入放在页面的后面，会先显示 {{msg}} 之后导入完成才会变成msg的数据-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    var vm = new Vue({
+        el: '#app',  
+        data: {  
+            msg: '123',
+            msg2:'<h1>h1h1h1h1h1</h1>',
+            mytitle:'我们自己定义的title'
+        }
+
+
+    })
+    </script>
+
+
+
+</html>
