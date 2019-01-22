@@ -30,6 +30,9 @@
         <input type="button" value="按钮" v-bind:title="mytitle + '加上其他字符串'">
         <!-- v-bind 可以简写成 : 要绑定的属性-->
         <input type="button" value="按钮" :title="mytitle + '简写'">
+        <!-- v-on 事件绑定 点击等什么时间，使用v-on绑定到methods的函数-->
+        <!-- v-on的缩写是 @ 比如 @click-->
+        <input type="button" value="点击" v-on:click="show">
     </div>
 
 </body>
@@ -43,8 +46,13 @@
             msg: '123',
             msg2:'<h1>h1h1h1h1h1</h1>',
             mytitle:'我们自己定义的title'
-        }
+        },
+        methods:{// 这个methods属性定义了当前vue实例所有可用的方法
+            show:function(){
+                alert("v-on:click事件触发")
+            }
 
+        }
 
     })
     </script>
