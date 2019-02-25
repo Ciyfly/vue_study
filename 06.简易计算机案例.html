@@ -1,0 +1,66 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <input type="text" v-model="n1">
+
+        <select v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+
+        <input type="text" v-model="n2">
+
+        <input type="button" value="=" @click="calc">
+
+        <input type="text" v-model="result">
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            // 上面绑定了下面的data中就要初始化
+            n1: 0,
+            n2: 0,
+            opt:"+",
+            result: 0
+        },
+        methods:{
+            // 一定要注意，这里要使用 Model的值是需要使用 this的。
+            // 这里取巧的话可以 使用eval函数来执行 拼接的字符串 3+2 
+            calc(){
+                switch(this.opt){
+                    case "+":
+                    this.result = parseInt(this.n1) + parseInt(this.n2)
+                    break;
+                    case "-":
+                    this.result = parseInt(this.n1) - parseInt(this.n2)
+                    break;
+                    case "*":
+                    this.result = parseInt(this.n1) * parseInt(this.n2)
+                    break;
+                    case "/":
+                    this.result = parseInt(this.n1) / parseInt(this.n2)
+                    break;
+                }
+            }
+        }
+    })
+    </script>
+
+
+
+</html>

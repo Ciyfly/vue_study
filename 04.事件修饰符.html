@@ -5,12 +5,60 @@
 <title>VUE day 3</title>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<style>
+    .inner {
+        height: 200px;
+        background-color: aqua;
+    }
+    .outer{
+        height: 300px;
+        background-color: black
+    }
+</style>
 </head> 
 
 <body>
 
     <div id="app">
-        <p>{{msg}}</p>
+       <div class="inner" @click="divHandler">
+           <!-- 使用 stop 阻止冒泡 -->
+           <p>使用 stop 阻止冒泡</p>
+           <input type="button" value="戳他" @click.stop="btnHandler">
+       </div>
+
+         <!-- 使用 prevent 阻止默认事件-->
+        <p>使用 prevent 阻止默认事件</p>
+       <a href="www.baidu.com" @click.prevent="linkClick">去百度</a>
+
+       <!-- 使用 capture 设置执行顺序先执行外面的在执行里面的-->
+       <div class="inner" @click.capture="divHandler">
+            <p>使用 capture 设置执行顺序先执行外面的在执行里面的</p>
+            <input type="button" value="戳他" @click="btnHandler">
+        </div>
+
+        <!-- 使用 self 只有点击自己的时候才触发事件，冒泡传递都不会触发-->
+        <div class="inner" @click.self="divHandler">
+                <p>使用 self 只有点击自己的时候才触发事件，冒泡传递都不会触发</p>
+                <input type="button" value="戳他" @click="btnHandler">
+            </div>     
+        
+        <!-- 使用 once 只触发一次  修饰符可以串联的 再次点就又可以跳转了-->
+        <a href="www.baidu.com" @click.prevent.once="linkClick">去百度</a>
+
+        <!-- stop 与 self的区别-->
+        <!--这里对中间的div进行了self 那么点击按钮的冒泡会冒泡到 最外面的div
+        但是如果自己使用 stop就直接限制了不再继续冒泡了
+        stop就直接给干断了，但是 self确实只阻止自己身上的冒泡事件的触发
+        不影响冒泡的继续-->
+        <div class="outer" @click="outdivHandler">
+                <div class="inner" @click.self="divHandler">
+                        <p>stop 与 self的区别</p>
+                        <input type="button" value="戳他" @click="btnHandler">
+                    </div>   
+        </div>
+
+
     </div>
 
 </body>
@@ -18,15 +66,27 @@
 
     var vm = new Vue({
         el: '#app', 
-        
-        data: {  
-            msg: '欢迎学习 Vue' 
-
-
+        data: { },
+        methods:{
+            divHandler(){
+                console.log("触发了div的方法")
+            },
+            btnHandler(){
+                console.log("触发了btn的方法")
+                // stop修饰符 阻止冒泡
+                //这样点击按钮的话会先触发按钮然后再触发div
+                // 按钮的事件冒泡出去了。这里我们就可以使用事件修饰符了
+                // 可以使用 stop 即 @click.stop 这样终止了冒泡 只会触发 到按钮不会到div了
+            },
+            linkClick(){
+                console.log("触发了a标签点击事件")
+                // prevent 注释默认修饰符 即 这里可以阻止 跳转只输出。
+            },
+            outdivHandler(){
+                console.log("触发了外部的div")
+            },
         }
-
-
-    })
+    });
     </script>
 
 

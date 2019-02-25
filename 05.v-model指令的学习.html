@@ -1,0 +1,43 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <h4>{{ msg }}</h4>
+
+        <!-- v-bind 只能实现数据的单向绑定 从model绑定到v中即页面上-->
+        <input type="text" :value="msg">
+        <!-- 使用 v-bind只能单向的比如这里我们修改了 msg但是上面的不会修改-->
+<br>
+        <input type="text" v-model="msg">
+        <!-- 这里 v-model 没有写:value 是因为说明 v-model直接将input的值绑定到data中的msg上-->
+        <!-- 这里进行就可以修改上面两个值，实现了双向绑定-->
+        <!-- 注意  v-model 只能用到表单元素总  比如 inpit select 等 比如之前使用的 下拉多选的绑定-->
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            // 这里就是model了  
+            // data的属性值都会挂载到 window.vm上面 
+            // 我们直接修改 window.vm 就可以修改model。这是单向的
+            
+            msg: "我爱学习 vue !!"  //注意这个地方时冒泡！！！不是等于
+        },
+        methods:{}
+    })
+    </script>
+
+
+
+</html>
