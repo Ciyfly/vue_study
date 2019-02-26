@@ -1,0 +1,67 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <div>
+            <label>ID:
+                <input type="text" v-model="id">
+            </label>
+            <label>name:
+                    <input type="text" v-model="name">
+                </label>
+
+            <label>添加:
+                    <input type="button" @click="btn">
+                </label>    
+        </div>
+        <!-- v-for 循环的时候 key属性只能使用 number 或者string-->
+        <!-- 注意 key 在使用的时候，必须使用 v-bind 属性绑定的形式， 指定key的值-->
+        <!-- 这个key 是v-for 指令的一个属性，用于保证唯一性的。-->
+        <!-- 在组件中，使用 v-for循环的时候，或者在一些特殊情况中，如果v-for有问题，必须在使用
+        v-for 的同时，指定唯一的字符串或者数字类型的 ：key 值-->
+        <p v-for="item in list" :key="item.id">
+            <input type="checkbox">
+            {{item.id}}----
+            {{item.name}}
+        </p>
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            id:'',
+            name:'',
+            list:[
+                {id:1, name:'张三'},
+                {id:2, name:'李四'},
+                {id:3, name:'王五'}
+            ]
+        },
+        methods:{
+            btn(){
+                // 列表的push加入啊原来是这样的 这样是加到后面
+                // this.list.push({id:this.id, name:this.name})
+                // unshit是加到前面
+                this.list.unshift({id:this.id, name:this.name})
+                // 这样写的话，当选择了一个，添加后，选择的那个会下移。
+                // 如何解决呢， 每个item要对应唯一性使用 key 
+
+            }
+        }
+    })
+    </script>
+
+
+
+</html>

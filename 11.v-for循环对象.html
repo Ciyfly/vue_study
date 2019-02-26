@@ -1,0 +1,36 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 可以遍历一个对象，也就是一个字典键值对
+             要注意的是 索引永远在最后   目前是 值，键，索引这样-->
+        <p v-for="(val, key ) in users">{{key}}---{{val}}</p>
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            users:{
+                id: 1,
+                name: "Recar",
+                gender: "男"
+            }
+        },
+        methods:{}
+    })
+    </script>
+
+
+
+</html>

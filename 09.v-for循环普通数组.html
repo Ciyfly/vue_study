@@ -1,0 +1,31 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 使用v-for 循环这个数组。 可以索引和值 对p标签for 就是说多个p了-->
+        <p v-for="(item, i) in list">{{i}}----{{item}}</p>
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            list: [1,2,3,4,5]
+        },
+        methods:{}
+    })
+    </script>
+
+
+
+</html>

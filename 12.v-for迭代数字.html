@@ -1,0 +1,29 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 如果是v-for去迭代数字，那么起始是从1开始的 而不是从0开始-->
+        <p v-for="i in 10">{{i}}</p>
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{}
+    })
+    </script>
+
+
+
+</html>

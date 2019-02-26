@@ -1,0 +1,36 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 对象就是无序键值对的集合-->
+        <!-- 如果有 - 线不能省略单引号，这里我们都写-->
+        <h1 :style="styObj">这是一个h1</h1>
+        <!-- 注意，数组这里 里面的是没有单引号的
+        为什么呢： 因为 这个是model中的是没有单引号的。-->
+        <h1 :style="[styObj, sty2Obj]">这是一个h1</h1>
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            styObj: {'color':'red', 'font-weight': 200},
+            sty2Obj: {'font-style':'italic'}
+        },
+        methods:{}
+    })
+    </script>
+
+
+
+</html>
