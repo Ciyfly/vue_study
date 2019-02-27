@@ -1,0 +1,170 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- 这里导入bootstarp -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+</head> 
+
+<body>
+
+    <div id="app">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <!-- 写了form-inline div里面的就会并排-->
+            <div class="panel-body form-inline">
+                <label>
+                    Id:
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+                <label>
+                        name:
+                        <input type="text" class="form-control" v-model="name">
+                    </label>     
+            <!-- 在vue中， 使用事件绑定机制，为元素绑定处理函数的时候，如果加了小括号就可以传参数了-->
+            <input type="button" value="添加" class="btn btn-primary" @click="add()">
+            <label>
+                    搜索名称关键字:
+                    <input type="text" class="form-control" v-model="keywords">
+            </label> 
+
+            </div>
+
+
+        </div>
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 之前 v-for中的数据，都是直接冲 data上的list渲染过滤的-->
+                <!--现在 我们自定义了一个search方法，同时把 关键字传递给search方法-->
+                <!-- 遍历，包含这个关键字的就返回, 实现实时更新数据-->
+                <tr v-for="item in search(keywords)" :key="item.id">
+                    <td>
+                        {{item.id}}
+                    </td>
+                    <td>
+                        {{ item.name }}
+                    </td>
+                    <td>
+                        {{ item.Ctime | dateFormat }}
+                    </td>
+                    <td>
+                        <a @click.prevent="deldete(item.id)">删除</a>
+                    </td>
+                                
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+<script>
+    // 全局的过滤器，进行时间格式化
+    Vue.filter('dateFormat', function(datestr){
+        console.log("filter")
+        // 根据给定的时间字符串得到 特定的时间
+        var dt = new Date(datestr)
+        // yyyy-mm-dd
+        var y = dt.getFullYear()
+        var m = dt.getMonth()+1
+        var d = dt.getDate()
+        console.log(datestr)
+        //return y+"-"+m+"-"+d
+        // 新的方法 666 学到了
+        return `${y}-${m}-${d}`
+    })
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            id:'',
+            name:'',
+            keywords: '',
+            list:[
+                {id: 1, name: "奔驰", Ctime: new Date()},
+                {id: 2, name: "宝马", Ctime: new Date()}
+            ]
+        },
+        methods:{
+            deldete(del_id){
+                //如何根据id拿到 要删数据的索引
+                //找到后直接 使用 splice方法
+                // this.list.some((item, i)=>{
+                //     if (item.id == del_id){
+                //         // 从i的位置删除，删除1个
+                //         this.list.splice(i, 1)
+                //         //在数组中如果 return true 就会立即终止这个数组的循环
+
+                //     return true;
+                // }
+                // })
+                
+                //还有新的方法
+                // 回调函数然后一个index 
+                var index = this.list.findIndex(item=>{
+                    if (item.id == del_id){
+                        return true
+                    }
+                })
+                this.list.splice(index, 1)
+            },
+            add(){
+                this.list.push({id: this.id, name: this.name, Ctime: new Date()})
+            },
+            search(keywords){// 根据关键字实现搜索
+            // var newList = []
+            //     this.list.forEach(item => {
+            //         // 字符子串有没有这个，使用是否有
+            //         if (item.name.indexOf(keywords) !=-1){
+            //             newList.push(item)
+            //         }
+                    
+            //     });
+            //     return newList
+            
+            //上面是一种判断的方法，下面是es6新的方法
+            // 注意   forEach some filter  findIndex 都是数组的新方法
+            // 都会对数组中的每一项进行遍历，执行相关操作。
+            var newList = this.list.filter((item)=>{
+                // 注意  ES6 中 为字符串提供了一个新方法，叫做 
+                // String.prototype.includes('要包含的字符串')
+                // 如果包含 则返回 
+                if (item.name.includes(keywords)){
+                    return item
+                }
+
+            })
+            return newList
+            }
+        }
+    })
+
+
+    </script>
+
+
+
+</html>
+
+<!-- 过滤器用时候的格式      {{name | nameope}}  值先使用| 后面的搞一下在输出 -->
+    <!-- // 定义 vue 过滤器. function 是对传过来的做什么操作
+    // 过滤器中的 func 第一个参数已经被规定死了，永远都是过滤器管道符前面传递的数据
+    // Vue.filter('过滤器名称', function(data){
+
+
+    // }) -->
