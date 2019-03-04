@@ -1,7 +1,10 @@
 <html>
     <head>
+    <!--   全局自定义指令 比如我们自己定义额 v-focus 焦点 指令 v-color 80行-->
+    <!-- 和js有关的写在 inserted 中， 和样式相关的一般都可以在bind中-->
+    <!-- 私有指令和 私有过滤器一样，写到vue中，是 directives:{这样，定义指令名，然后钩子函数}-->
+    <!-- 自定义指令可以简写，但是简写只是 bind和update中。会同时赋予  114行-->
 <meta charset="UTF-8">
-<!--这个讲的是过滤器， 全局，私有过滤器还有 padStart 填充字符串的方法-->
 
 <title>VUE day 3</title>
 
@@ -26,13 +29,14 @@
                 </label>
                 <label>
                         name:
-                        <input type="text" class="form-control" v-model="name">
+                        <input type="text" class="form-control" v-model="name" @keyup.enter="add">
                     </label>     
             <!-- 在vue中， 使用事件绑定机制，为元素绑定处理函数的时候，如果加了小括号就可以传参数了-->
             <input type="button" value="添加" class="btn btn-primary" @click="add()">
             <label>
                     搜索名称关键字:
-                    <input type="text" class="form-control" v-model="keywords">
+                    <!--注意： Vue中所有的指令，在调用时，都以 v-开头-->
+                    <input type="text" class="form-control" v-model="keywords" v-focus v-color="'blue'" v-fontsize="30">
             </label> 
 
             </div>
@@ -58,10 +62,10 @@
                         {{item.id}}
                     </td>
                     <td>
-                        {{ item.name }}
+                        {{item.name}}
                     </td>
                     <td>
-                        {{ item.Ctime | dateFormat() }}
+                        {{item.Ctime}}
                     </td>
                     <td>
                         <a @click.prevent="deldete(item.id)">删除</a>
@@ -73,71 +77,44 @@
         </table>
     </div>
 
-    <div id="app2">
-        {{dt | dataFormat}}
-    </div>
-
 </body>
 <script>
-    // 过滤器采用的是就近原则，如果私有的和全局的一致，那么优先采用私有的优先。
 
-    // 那我们定义个私有的过滤器
-    var vm2 = new Vue({
-        el: "#app2",
-        data:{
-            dt: new Date()
+    // 使用 Vue.directive 定义全局自定义指令
+    // 其中 参数1： 指令的名称， 注意，在定义的时候，指令的名称前面，不需要加 v-前缀,但是在调用的时候必须写v-
+    //      参数2： 是一个对象，这个对象身上有一些指令相关的函数,这些函数可以在特定的阶段执行相关的操作
+    Vue.directive('focus',{
+        bind: function(el){   //每当指令绑定到元素傻瓜的时候，会立即执行这个函数,且只执行一次
+        // 这个参数el ，就是被绑定的元素 
+        el.focus()
+        // 这个bind，我们的元素还没有放到demo中去，还没有生成，
+        // 在元素刚绑定了指令的时候，还没有插入到demo中去，这时候调用focus方法，没有作用,因为一个元素只有插入demo后才能获取焦点
+        
         },
-        methods:{},
-        filters:{// 定义私有过滤器, 过滤器有两个条件， 过滤器名称和处理函数 
-            dataFormat: function(dataStr, pattern=""){
-            var dt = new Date(dataStr)
-            var y = dt.getFullYear()
-            var m = (dt.getMonth()+1).toString().padStart(2, '0')// 这里是 es6的字符串的新语法,可以 填充字符串，有参数用什么填空
-            var d = dt.getDate().toString().padStart(2, '0')    // 这里因为月日可能是1位的，所以这样用0填充
-            if (pattern && pattern.toLowerCase() === 'yyyy-mm-dd'){
-                return `${y}-${m}-${d}`
-            }else{
-                var hh = dt.getHours().toString().padStart(2, '0')
-                var mm = dt.getMinutes().toString().padStart(2, '0')
-                var ss = dt.getSeconds().toString().padStart(2, '0')
-                return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
-            }
-                }
+        inserted: function(el){// 表示元素插入到demo中的时候会执行这个 inserted函数，只触发一次.
+        el.focus()//  这里直接节点 调用 focus就可以获取焦点。 多看api啊
+        },
+        updated: function(el){// 当Vnode更新的时候，会执行 update，可能会触发多次
 
         }
     })
+    // 自定义设置字体颜色的指令
+    Vue.directive('color',{
+        // 为什么这里设置样式的元素可以写在bind中，因为样式不需要插入，只有写了样式，有元素了就会应用
+        // 样式只要通过指令绑定给了元素，不管这个元素有没有被插入到页面中去，这个元素肯定有了一个内联的样式
+        // 将来元素肯定会显示到页面中去。这时候，浏览器的渲染引擎必然会解析样式进行应用
+        bind: function(el, binding){
+            // binding是钩子函数自己的参数，里面有很多属性
+            // binding.value  是把那个 blue输出
+            // binding.expression  是原始的也就是  'blue'
+            el.style.color=binding.value
+        },
 
-
-
-    // 全局过滤器，可以针对多个vue实例。
-    // 全局的过滤器，进行时间格式化
-    Vue.filter('dateFormat', function(datestr, pattern){
-        console.log("filter")
-        // 根据给定的时间字符串得到 特定的时间
-        var dt = new Date(datestr)
-        // yyyy-mm-dd
-        var y = dt.getFullYear()
-        var m = dt.getMonth()+1
-        var d = dt.getDate()
-        console.log(datestr)
-        //return y+"-"+m+"-"+d
-        // 新的方法 666 学到了
-        // return `${y}-${m}-${d}`
-
-        //如果不传的情况，说不是空且符合条件 或者在参数那里写个默认值为空也可以
-        if (pattern && pattern.toLowerCase() === 'yyyy-mm-dd'){
-            return `${y}-${m}-${d}`
-        }else{
-            var hh = dt.getHours()
-            var mm = dt.getMinutes()
-            var ss = dt.getSeconds()
-            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
-        }
     })
+    Vue.directive('fontsize', function(el, binding){// 这个function 等同于把代码写到了bind和 update中。
+        el.style.fontSize = parseInt(binding.value)+"px"
 
-
-
-
+    })
 
     var vm = new Vue({
         el: '#app', 
@@ -200,21 +177,11 @@
 
             })
             return newList
-            }
+            },
         }
     })
-
-
     </script>
 
 
 
 </html>
-
-<!-- 过滤器用时候的格式      {{name | nameope}}  值先使用| 后面的搞一下在输出 -->
-    <!-- // 定义 vue 过滤器. function 是对传过来的做什么操作
-    // 过滤器中的 func 第一个参数已经被规定死了，永远都是过滤器管道符前面传递的数据
-    // Vue.filter('过滤器名称', function(data){
-
-
-    // }) -->

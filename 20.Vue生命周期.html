@@ -1,0 +1,86 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+<!-- 29行开始讲解 vue的生命周期-->
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <h3 id="h3">{{msg}}</h3>
+        <input type="button"value ="修改msg" @click="msg='No'">
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            msg: "ok"
+        },
+        methods:{
+            show(){
+                console.log("执行了show方法")
+            },
+        },
+        beforeCreate(){// 我们遇到的第一个生命周期函数，表示实例完全被创建出来之前会执行他
+            //console.log(this.msg)
+            // this.show()
+            // 注意 在beforeCreate 生命周期函数执行的时候， data methods 都不会被初始化
+
+        },
+        created(){// 这个是遇到的第二个生命周期函数
+            // console.log(this.msg)
+            // this.show()
+            // 如果要调用methods中的方法或者操作data中的数据，最早只能在created中操作
+
+        },
+        beforeMount(){// 这个是遇到到第三个生命周期函数，表示 模板已经编译完成了
+        // 但是尚未把模板渲染到页面中。
+            // console.log(document.getElementById("h3").innerText)
+            // 这里输出的是 {{msg}} 因为还没有渲染
+        },
+        mounted(){// 这个是遇到的第四个生命周期函数，表示内存中的模板已经真实挂载到页面中，
+                // 用户已经看到最新的数据了，也就是说页面被渲染好了
+            // console.log(document.getElementById("h3").innerText)
+            // mouted是实例创建期间的最后一个生命周期函数，当执行完 meouted 就表示
+            // 实例已经被完全创建好了。此时，如果没有没有其他操作的话，实例就静静的躺在内存中
+
+        },
+
+
+        // 接下来是运行中的两个事件
+
+
+        beforeUpdate(){// 这时候， 表示 我们的界面还没有被更新， 数据已经更新了
+            // console.log("界面上的数据: "+document.getElementById("h3").innerText)
+            // console.log("data 中 msg的数据: "+this.msg)
+            // 这里界面输出 ok  但是data输出 no。  data永远是最新的
+            // 当知心 beforeUpdate 的时候，页面中的显示的数据还是旧的， 此时， data数据是最新的
+            // 因为还没有更新上去呢。
+
+        },
+        updated(){ // update事件执行的时候 页面与data中的数据已经保持一致，最新的了
+            // console.log("界面上的数据: "+document.getElementById("h3").innerText)
+            // console.log("data 中 msg的数据: "+this.msg)
+        },
+
+        beforeDestroy(){
+            // 进入销毁阶段，但是那些data methods 过滤器都可以用
+        },
+
+        destroyed(){
+            // 完成销毁，所有的都不可用了。
+        }
+
+    })
+    </script>
+
+
+
+</html>
