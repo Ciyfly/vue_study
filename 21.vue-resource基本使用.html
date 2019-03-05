@@ -1,0 +1,60 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+<!-- vue-resource 发起get post 请求-->
+
+<title>VUE day 3</title>
+
+<script src="lib/vue-2.4.0.js"></script>
+<!-- 注意 vue-resource 依赖于vue 所以要注意先后顺序-->
+<script src="lib/vue-resource-1.3.4.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <input type="button" value="get请求" @click="getInfo">
+        <input type="button" value="post请求" @click="postInfo">
+        <input type="button" value="jsonp请求" @click="jsonpInfo">
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{
+            getInfo(){
+                // 当发起 get请求之后， 通过 .then里面接的是成功的话的函数
+                this.$http.get('http://kerys.pythonanywhere.com/api/getprodlist/').then(
+                    function(result){
+                        // 通过rsult.body 拿到服务器返回的成功的数据
+                        console.log(result.body)
+                    }
+                )
+            },
+            postInfo(){
+                // 手动发起的post请求默认没有表单，有的服务器处理不了。
+                // 通过post方法的第三个参数， 设置提交的内容类型Wie 普通表单格式
+                this.$http.post('http://kerys.pythonanywhere.com/api/getprodlist/', {}, {emulateJSON: true}).then(
+                    function(result){
+                        console.log(result.body)
+                    }
+                )
+            },
+            jsonpInfo(){
+                // 发起jsonp请求
+                this.$http.jsonp('http://kerys.pythonanywhere.com/api/getprodlist/').then(result=>{
+                    // 匿名函数 可以直接 参数=> {} 来写
+                    console.log(result.body)
+
+                })
+            }
+        }
+    })
+    </script>
+
+
+
+</html>

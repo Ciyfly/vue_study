@@ -1,0 +1,75 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+<!-- vue 的简单动画 (过渡类名实现)   神奇，只要 用动画标签包裹起来， 直接去写样式就可以了。但是样式是 v-开头的那种而且有固定的时间钩子-->
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+<!-- 自定义两组样式, 来控制 h3样式-->
+<style>
+    /*  v-enter 是进入之前的起始状态，此时还没有进入*/
+    /* v-leave-to 是动画离开之后，离开的终止状态，此时 元素 动画已经结束了*/
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translateX(150px);
+    }
+    /* v-enter-action 是 入场动画的时间段*/
+    /* v-leave-action 是 离场动画的时间段*/
+    .v-enter-active,
+    .v-leave-active{
+        transition: all 0.4s ease;
+    }
+
+    .my-enter,
+    .my-leave-to{
+        opacity: 0;
+        transform: translateY(70px);
+    }
+    /* v-enter-action 是 入场动画的时间段*/
+    /* v-leave-action 是 离场动画的时间段*/
+    .my-enter-active,
+    .my-leave-active{
+        transition: all 0.8s ease;
+    }
+</style>
+<body>
+
+    <div id="app">
+        <!-- 需求， 点击按钮，让 h3隐藏， 再点击 让h3显示-->
+        <transition>
+            <h3 v-if="flag">这是一个h3</h3>
+        
+        </transition>
+        <input type="button" value="toggle" @click="flag=!flag">
+        <!-- 1.使用 transition 元素 把需要被动画控制的元素，包裹起来-->
+        <!-- transition 是官方提供的元素-->
+
+        <!-- 注意-->
+        <!-- 这里给动画标签加了个name属性，那么他的动画前缀就不是 v-了而是 这个name -  这样可以区分不同动画-->
+        <transition name="my">
+                <h3 v-if="flag2">这是一个h6</h3>
+            
+            </transition>
+            <input type="button" value="toggle2" @click="flag2=!flag2">
+
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            flag: false,
+            flag2: false
+        },
+        methods:{}
+    })
+    </script>
+
+
+
+</html>

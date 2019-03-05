@@ -1,0 +1,20 @@
+<!-- 太简单的了我就不写了。-->
+<!-- 这里只记录一些个别地方-->
+<!--
+    首先获取数据，拿到数据更新到 data里的一个值list ，这个值是绑定到表格的。
+    那么我们这个方法要调用啊。 什么时候调用这个方法啊。
+    那么我们根据vue的生命周期，应该在created后调用这个方法获取list数据。
+    那么这个created函数在哪呢： created是和 el, data, methods并列的一个级别的
+    获取状态码是这样的 result.body.status 要注意有个 body！！！
+    post 增加要注意 这样的 {name: this.name}
+
+    // 请求的url 根路径，我们配置
+    我们只想 /api/xxx/ 前面的由 vue-resource来提供，怎么做呢
+    Vue.http.options.root ='http://www.baidu.com'
+    这样就设置了根域名,但是启用的话，需要下面的url请求开头不能有 / 即 /getInfo 是不对的
+    得是 getInfo     这个是相对路径
+
+    post那个可以设置 全局的 表单提交 
+    Vue.http.options.emlateJSON=true;
+
+-->
