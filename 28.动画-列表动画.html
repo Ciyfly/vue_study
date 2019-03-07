@@ -1,0 +1,103 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+<!-- 列表增删动画效果    6的很，原来是这么实现的-->
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<style>
+    li{
+        border: 1px dashed #006c54;
+        margin: 5px;
+        line-height: 35px;
+        font-size: 12px;
+        width: 100%
+    }
+
+
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translate(0,80px);
+    }
+    .v-enter-active,
+    .v-leave-active{
+        transition: all 0.6s ease;
+    }
+    /* v-move v-leave-active 配合使用能够实现 列表后续元素渐渐的飘上来的效果*/
+    .v-move{
+        transition: all 0.6s ease;
+    }
+    .v-leave-active{
+        position: absolute;
+    }
+    li:hover{
+        background-color: #006c54;
+        transition: all 0.6s ease;
+    }
+</style>
+</head> 
+
+<body>
+
+    <div id="app">
+        <div>
+            <label>
+                ID:
+                <input type="text" v-model="id"> 
+            </label>
+
+            <label>
+                    NAME:
+                    <input type="text" v-model="name"> 
+            </label>
+            <input type="button" value="添加" @click="add">
+        </div>
+        <!-- <ul> -->
+            <!-- 在实现列表过渡的时候，如果需要过渡的元素是通过 v-for循环渲染出来的，不能是使用 transition 包裹 
+                 需要使用 transition-group-->
+            <!-- 如果要给v-for 设置动画的话，要给每个元素设置key属性-->
+            <!-- appear 可以实现列表 入场的动画 ，就是页面刚展示出来的时候的列表的效果-->
+            <!-- 使用 tag属性来指定 transition-group渲染为什么样的元素，如果不指定 tag属性，默认渲染为 span标签
+                 这里让其为 ul就可以保持规范，去掉外部的 ul，这里让他生成ul-->
+            <transition-group appear tag="ul">
+                <li v-for="(item, i) in list" :key="item.id" @click="del(i)">
+                    {{item.id}} --- {{item.name}}
+                </li>
+            </transition-group>
+        <!-- </ul> -->
+
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            id: '',
+            name: '',
+            list:[
+                {id:1, name: '赵高'},
+                {id:2, name: '秦桧'},
+                {id:3, name: '严嵩'},
+                {id:4, name: '魏忠贤'}
+            ]
+        },
+        methods:{
+            add(){
+                this.list.push({id: this.id, name: this.name})
+                this.id = this.name=''
+            },
+            del(i){
+                this.list.splice(i,1);
+            }
+        }
+    })
+    </script>
+
+
+
+</html>
