@@ -1,0 +1,46 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+<!-- 使用第三方库来实现动画   animate.css-->
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<link rel="stylesheet" href="lib/animate.css">
+<!--   入场 bounceIn   离场 bounceOut-->
+<!-- enter-active 是vue动画的 钩子  要注意的是 使用了 animate 要都写 animated 
+        :duration="400"  指定入场和离场时间都是 400毫秒   
+        还可以设置个表达式 :duration="{enter:200, leave:400}" 这样就是入场200 离开400 -->
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 需求， 点击按钮，让 h3隐藏， 再点击 让h3显示-->
+        <!--<transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="400">-->
+        <transition enter-active-class="animated bounceIn"
+         leave-active-class="animated bounceOut"
+          :duration="{enter:200, leave:400}">
+            <h3 v-if="flag">这是一个h3</h3>
+        </transition>
+
+
+        <input type="button" value="toggle" @click="flag=!flag">
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            flag: false
+        },
+        methods:{}
+    })
+    </script>
+
+
+
+</html>
