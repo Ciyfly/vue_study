@@ -1,0 +1,56 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+<!-- 组件的中的data 和methods
+     组件中的data 要定义为一个函数，且返回的是一个对象，如下31行-->
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <my-com1></my-com1>
+        <my-com1></my-com1>
+        <my-com1></my-com1>
+        <!-- data 定义为一个函数，是因为这样可以防止多个vue组件操作一个data数据-->
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <input type="button" value="+1" @click="icncrement">
+            <h3>{{count}}</h3>
+        </div>
+    </template>
+</body>
+<script>
+    // 如下就是一个组件 带有  data 的 和methods
+    Vue.component('myCom1',{
+        // 这里可以引用 自己组件的 data数据 
+        template: '#tmpl',
+        // 组件的data必须是一个方法，且一定要返回一个对象
+        data: function(){
+            return {
+                msg:'这是组件中data定义的数据',
+                count: 0
+            }
+        },
+        methods:{
+            icncrement(){
+                this.count+=1
+            }
+        }
+    })
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{}
+    })
+    </script>
+
+
+
+</html>
