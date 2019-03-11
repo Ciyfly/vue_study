@@ -1,0 +1,34 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <my-com2></my-com2>
+    </div>
+
+</body>
+<script>
+
+    Vue.component('myCom2',{
+        // 组件只能有一个根元素
+        // 无论是哪种方式创建的组件，组件的template指向的模板内容必须有且只有唯一的根元素
+        template: '<div><h3>这个是直接使用 component 创建出来的组件</h3><span>test span</span></div>'
+    })
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{}
+    })
+    </script>
+
+
+
+</html>
