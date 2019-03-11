@@ -5,18 +5,6 @@
 <title>VUE day 3</title>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<style>
-
-    .v-enter,
-    .v-leave-to{
-        opacity: 0;
-        transform: translateX(150px);
-    }
-    .v-enter-active,
-    .v-leave-active{
-        transition: all, 0.5s ease
-    }
-</style>
 </head> 
 
 <body>
@@ -29,10 +17,7 @@
         <!-- Vue提供了 component 来展示对应名称的组件-->
         <!-- component 是一个占位符， :is属性,可以用来指定要展示组件的名称-->
         <!-- 这里要用单引号包着组件名，因为是一个组件的名，是字符串-->
-        <!-- 通过 mode属性，设置组件切换的模式 -->
-        <transition mode="out-in">
-            <component :is="comName"></component>
-        </transition>
+        <component :is="comName"></component>
     </div>
 
 
