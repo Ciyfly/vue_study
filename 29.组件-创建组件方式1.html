@@ -23,14 +23,20 @@
 
 </body>
 <script>
-    // 1.1使用 vue.extend 创建全局的vue组件
-    var com1 = Vue.extend({
-        template: '<h3>这是使用 extend创建的组件</h3>' // 通过template属性，指定了组件要展示的HTML结构
+    // // 1.1使用 vue.extend 创建全局的vue组件
+    // var com1 = Vue.extend({
+    //     template: '<h3>这是使用 extend创建的组件</h3>' // 通过template属性，指定了组件要展示的HTML结构
        
-    })
-    // 1.2 使用 Vue.component('组件的名称', 创建出来的组件模板对象)
-    Vue.component('myCom1', com1)
-
+    // })
+    // // 1.2 使用 Vue.component('组件的名称', 创建出来的组件模板对象)
+    // Vue.component('myCom1', com1)
+   
+   // 还可以写到一起 
+   // Vue.component 第一个参数：组件的名称，将来在引用组件的时候，就是一个标签形式来引入
+   // 第二个参数就是 Vue.extend 创建的组件 
+   Vue.component('myCom1', Vue.extend({
+    template: '<h3>这是使用 extend创建的组件</h3>'
+   }))
     
 
     var vm = new Vue({
