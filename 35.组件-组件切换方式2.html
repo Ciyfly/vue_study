@@ -1,0 +1,46 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a>
+
+
+        <!-- Vue提供了 component 来展示对应名称的组件-->
+        <!-- component 是一个占位符， :is属性,可以用来指定要展示组件的名称-->
+        <!-- 这里要用单引号包着组件名，因为是一个组件的名，是字符串-->
+        <component :is="comName"></component>
+    </div>
+
+
+</body>
+<script>
+    Vue.component('login',{
+        template: '<h3>登录组件</h3>'
+    })
+
+    Vue.component('register',{
+        template: '<h3>注册组件</h3>'
+    })
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            flag: false,
+            comName: 'login'
+        },
+        methods:{}
+    })
+    </script>
+
+
+
+</html>
