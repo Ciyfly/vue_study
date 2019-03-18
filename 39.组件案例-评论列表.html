@@ -1,0 +1,93 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+</head> 
+
+<body>
+
+    <div id="app">
+        
+        <cmt-box @func="add"></cmt-box>
+
+        <ul class="list-group" v-for="item in list" :key="item.id">
+
+            <li class="list-group-item">
+                <span class="badge">评论人:{{item.user}}</span>
+                    {{item.content}}
+            </li> 
+        </ul>
+
+
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <div class="form-group">
+                <label>评论人: </label>
+                <input type="text" class="form-control" v-model="user">
+            </div>
+
+            <div class="form-group">
+                    <label>评论内容: </label>
+                    <input type="text" class="form-control" v-model="content">
+                </div>
+            
+                <div class="form-group">
+                    <input type="button" value="发表评论" class="btn btn-primary" @click="postComment">
+                </div>
+
+        </div>
+    </template>
+
+</body>
+<script>
+
+    var commentBox ={
+        template:"#tmpl",
+        // 这里注意 子组件 data变成了一个方法，属性值写到return中
+        data(){
+            return {
+                user:'',
+                content:'',
+
+            }
+        },
+        methods:{
+            postComment(){
+                // 发表评论的业务逻辑。
+                var data ={id: Date.now(), user:this.user, content:this.content}
+                // 这里注意，这里的函数名是 子组件的@的函数名，且！！！有单引号的，传入的是字符串
+                this.$emit('func', data)
+            }
+        }
+
+    }
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            list:[
+                {id: 1, user:'李白', content:'天生我材必有用'},
+                {id: 2, user:'江小白', content:'劝君更尽一杯酒'},
+                {id: 3, user:'小马', content:'充钱使你变强'}
+            ]
+        },
+        methods:{
+            add(data){
+                this.list.push(data)
+            }
+        },
+        components:{
+            'cmt-box':commentBox
+        }
+    })
+    </script>
+
+
+
+</html>
