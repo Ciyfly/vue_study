@@ -1,0 +1,52 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="lib/vue-router-3.0.1.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 如果在路由中 使用查询字符串 给路由传递参数则不需要修改 路由规则的path属性-->
+
+        <router-link to="/login/10">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+
+</body>
+<script>
+    var login = {
+        // 这里的this是可以省略的,因为就是当前的this,可以直接省略
+        //这里就是可以获取路由的参数 $route.params.属性名
+        // 多个参数是一样的
+        template: '<h1>登录-----{{$route.params.id}}</h1>',
+    }
+
+    var register ={
+        template: '<h1>注册</h1>'
+    }
+
+    var router = new VueRouter({
+        routes:[
+            // 增加一个占位符 id 
+            {path:'/login/:id',component:login},
+            {path:'/register',component:register},
+        ]
+    })
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{},
+        router // 这里属性和属性名一样直接写 router就可以了.
+    })
+    </script>
+
+
+
+</html>
