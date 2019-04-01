@@ -1,0 +1,86 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="./lib/vue-2.4.0.js"></script>
+<!-- 使用 vue-router标签-->
+<script src="./lib/vue-router-3.0.1.js"></script>
+
+<style>
+    /*  这个是因为 只要使用 router-link 弄的 选中的 都会有这个类 
+        我们直接定义这个类, 那么选中的就会是这种样式了*/
+    .router-link-active{
+        color: red;
+        font-weight: 800;
+        font-style: italic;
+        font-size: 80px;
+        text-decoration: underline;
+    }
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translateX(140px);
+    }
+
+    .v-enter-active,
+    .v-leave-active{
+        transition: all 0.5s ease;
+    }
+</style>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 这里得注意是 #/路径 !!! 这样切换的是url的地址,然后 vue-router 监控到url变化对应切换组件-->
+        <!-- <a href="#/login" >登录</a>
+        <a href="#/register">注册</a> -->
+        
+        <!-- router-link 默认渲染一个a标签  可以通过 tag标签来设置生成的标签-->
+        <router-link to="/login" tag="span">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <transition mode="out-in"> <!--实现动画-->
+        <!-- vue-router 提供的元素，专门用来当做占位符的,路由规则匹配到的组件就会展示到这个router-view里去-->
+        <router-view></router-view>
+        </transition>
+    </div>
+
+</body>
+<script>
+
+    var login = {
+        template:'<h1>登录组件</h1>'
+    }
+
+    var register = {
+        template:'<h1>注册组件</h1>'
+    }
+
+    // 创建一个路由对象, 当导入 vue-router包之后, 在 Windows全局对象中,就有了一个路由的构造函数
+    // 叫做 VueRouter
+    // 在new VueRouter, 可以为构造函数传递一个配置对象
+    var routerobj = new VueRouter({
+        routes:[
+            // 这里的组件得是组件对象,不能是组件名
+            {path: '/', redirect: '/login'},  // 这里的重定向和Node中的 redirect 302 重定向
+            {path: '/login', component: login},
+            {path: '/register', component: register}
+              // 每个规则路由，都是一个对象，身上有两个必须的属性 path component
+        ]     // 这个配置对象中的 route 表示 路由匹配规则的意思
+
+    })
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{},
+        router: routerobj  // 将路由规则对象注册到vm实例上,用来监控url地址变化，展示对应的组件 
+    })
+    </script>
+
+
+
+</html>
