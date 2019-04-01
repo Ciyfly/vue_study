@@ -1,0 +1,66 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="lib/vue-router-3.0.1.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <router-link to="/account">主页</router-link>
+        <router-view></router-view>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h1>这是 account组件</h1>
+            <router-link to="/account/login">登录</router-link>
+            <router-link to="/account/register">注册</router-link>
+            <router-view></router-view>
+        </div>
+
+    </template>
+
+</body>
+<script>
+
+    var account ={
+        template: "#tmpl"
+    }
+    var login ={
+        template: '<h3>登录</h3>'
+    }
+    var register ={
+        template: '<h3>注册</h3>'
+    }
+
+    var router = new VueRouter({
+        routes:[
+            {path:'/account',
+             component: account,
+             children: [
+             // 注意这里没有 / 要注意 如果写了 / 那么就说明是从根开始匹配的 直接login就是前面是上一级的
+             {path:'login', component: login},
+             {path:'register', component: register}
+             ]
+            },
+            // {path:'/account/login', component: login},
+            // {path:'/account/register', component: register}
+        ]
+    })
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{},
+        router
+    })
+    </script>
+
+
+
+</html>
