@@ -1,0 +1,40 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 如何监听到文本框数据改变-->
+        <!---->
+        <input type="text" v-model="firstname" @keyup="getFullname"> +
+        <input type="text" v-model="lastname" @keyup="getFullname"> =
+        <input type="text" v-model="fullname"> 
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            firstname: '',
+            lastname: '',
+            fullname:''
+        },
+        methods:{
+            getFullname(){
+                this.fullname = this.firstname+'-'+this.lastname
+            }
+        }
+    })
+    </script>
+
+
+
+</html>
