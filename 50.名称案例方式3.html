@@ -1,0 +1,49 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 如何监听到文本框数据改变-->
+        <!---->
+        <input type="text" v-model="firstname"> +
+        <input type="text" v-model="lastname" > =
+        <input type="text" v-model="fullname"> 
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            firstname: '',
+            lastname: '',
+
+        },
+        methods:{
+            getFullname(){
+                this.fullname = this.firstname+'-'+this.lastname
+            }
+        },
+        computed:{ // computed可以定义一些属性,这些属性叫做计算属性,计算属性的本质就是一个方式
+                    // 只不过 我们在使用计算机属性的时候是把他们的名称直接当做属性来使用,并不会把计算属性当做方法
+            fullname:function(){
+                return this.firstname+' '+this.lastname
+            }// 也就是说computed里的数据是动态计算的,我们直接return 因为是动态计算的 compputed
+            // 注意 计算属性在引用的时候 一定不要加小括号去调用,直接把他当做普通属性使用。
+            // 注意 计算属性内部,只要依赖data的值发生变化 计算属性就会重新计算
+            // 注意 计算属性的求值结果 会被缓存起来 方便下次直接使用 如果计算属性方法中 所有的data数据都没有变化 那么不会重新计算
+        }
+    })
+    </script>
+
+
+
+</html>
