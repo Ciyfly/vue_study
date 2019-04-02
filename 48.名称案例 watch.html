@@ -1,0 +1,48 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <!-- 如何监听到文本框数据改变-->
+        <!---->
+        <input type="text" v-model="firstname" > +
+        <input type="text" v-model="lastname" > =
+        <input type="text" v-model="fullname"> 
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {
+            firstname: '',
+            lastname: '',
+            fullname:''
+        },
+        watch:{ // 这个可以监控指定数据的变化,然后出发watch中对应的方法
+            firstname:function(){// 监控data上的firstname的数据变化
+            this.getFullname()
+            },
+            lastname:function(){
+            this.getFullname()
+            }
+        },
+        methods:{
+            getFullname(){
+                this.fullname = this.firstname+'-'+this.lastname
+            }
+        }
+    })
+    </script>
+
+
+
+</html>
