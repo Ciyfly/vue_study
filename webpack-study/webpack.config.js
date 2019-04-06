@@ -42,8 +42,11 @@ module.exports = {
             // 配置处理点css文件的第三方loader规则
             // 注意 这里处理的顺序是 从右到左 即 先css-loader处理后生成的传递给 style-loader在处理
             // 然后将样式就返回了。将结果返回给webpack进行打包 最终输出到 main.js
-            {test: /\.less/, use: ['style-loader', 'css-loader', 'less-loader']}
+            {test: /\.less/, use: ['style-loader', 'css-loader', 'less-loader']},
             // 这是处理.less文件的第三方规则
+            {test: /\.scss/, use:['style-loader', 'css-loader', 'sass-loader']}
+            // 处理 scss第三方规则
+
         ]
     }
 }

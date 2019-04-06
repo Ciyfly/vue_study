@@ -23,6 +23,9 @@ import './css/index.css'
 import './css/index.less'
 // 导入less 的样式 需要安装 less-loader 这个是依赖 less的 这里less是less-loader依赖的
 
+import './css/index.scss'
+// 需要 sass-loader node-sass (node-sass需要使用cnpm安装, 用npm安装容易出错) 我用 npm安装还是可以的
+
 $(function(){
     $('li:odd').css('backgroundColor', 'blue')
     $('li:even').css('backgroundColor', function(){
