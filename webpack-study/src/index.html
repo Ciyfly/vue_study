@@ -6,10 +6,18 @@
         <!-- 注意这里不推荐引入任何包和css文件 因为会发起二次请求 -->
         <!-- 通过webpack前端构建工具把index.js处理生成 main.js文件-->
         <!-- <script src="../dist/main.js"></script> -->
-        <script src="/main.js"></script>
+
+        <!-- 当使用 html-webpack-plugin插件后就不用手动引入 main.js
+             插件会自动帮我们引用-->
+        <!-- <script src="/main.js"></script> -->
+
+
         <!-- 这里为什么是 main.js而不是 ../dist/main.js 是因为使用了 webpack-dev-server
            他会在本地8080端口启动服务 而且实时编译 编译的js文件是在 localhost:8080/main.js路径的
         所以这里直接写, 这个js与dist不是一个js  方便写代码-->
+        
+        <!-- 这里不这样导入因为会有二次请求在 index.js中做-->
+        <!-- <link rel="stylesheet" href="./css/indes.css"> -->
 </head> 
 
 <body>
