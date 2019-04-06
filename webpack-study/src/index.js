@@ -20,7 +20,8 @@ import './css/index.css'
 // 上有个rules属性 这个rules属性是个数组 这个数组中存放了所有第三方文件的匹配和处理规则 test属性 正则 use 使用哪个规则
 
 
-
+import './css/index.less'
+// 导入less 的样式 需要安装 less-loader 这个是依赖 less的 这里less是less-loader依赖的
 
 $(function(){
     $('li:odd').css('backgroundColor', 'blue')
