@@ -30,7 +30,9 @@ module.exports ={
             // 但是这里可以将图片的 hash 加上图片的文件名 [hash:8]-[name].[ext] 8位hash值
             {test: /\.(jpg|png|gif|bmp|jpeg)/, use: 'url-loader?limit=20480&name=[hash:8]-[name].[ext]'},
             // 字体也要写引入 这里bootstrap会引入字体所以要写
-            {test: /\.(ttf|eot|svg|woff|woff2)/, use: 'url-loader'}
+            {test: /\.(ttf|eot|svg|woff|woff2)/, use: 'url-loader'},
+            // Babel 来转换高级的ES语法
+            {test: /\.js$/, use: 'babel-loader', exclude: /node_modules/},
             
         ]
     }
