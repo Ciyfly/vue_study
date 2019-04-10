@@ -1,0 +1,38 @@
+<html>
+    <head>
+<meta charset="UTF-8">
+
+<title>VUE day 3</title>
+<!-- render渲染出来的组件会直接替换el的组件 el原来的东西直接没有了替换为render的组件-->
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+
+<body>
+
+    <div id="app">
+        <p>测试的会不会有</p>
+        <!-- <login></login> -->
+
+    </div>
+
+</body>
+<script>
+    var login = {
+        template:'<h1>登录组件</h1>'
+    }
+
+    var vm = new Vue({
+        el: '#app', 
+        data: {},
+        methods:{},
+        render:function(createElements){ //createElements 是一个方法调用他能够把自动的组件模板渲染为html结构
+            return createElements(login) //返回渲染的html
+            // 这里return的结果会替换页面中el 指定的那个容器 el就是vue的那个el属性
+        }
+    })
+    </script>
+
+
+
+</html>
