@@ -34,7 +34,9 @@ module.exports ={
             // Babel 来转换高级的ES语法
             {test: /\.js$/, use: 'babel-loader', exclude: /node_modules/},
             // 解析vue文件的loader
-            {test: /\.vue$/, use: 'vue-loader'}
+            {test: /\.vue$/, use: 'vue-loader'},
+            
+            { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] }
             
         ]
     },
