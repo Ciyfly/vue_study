@@ -1,0 +1,13 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: cyan;
+}
+.box{
+    width: 220px;
+    height: 120px;
+    /* 默认情况下 webpack无法处理css中的url地址  无论是图片还是字体库 只要是url地址都处理不了 */
+    /* 这里需要 file-loader  url-loader */
+    background:url("../images/timg.jpg");
+    background-size: cover;
+}
