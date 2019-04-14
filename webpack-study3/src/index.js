@@ -56,3 +56,9 @@ var vm = new Vue({
 
 
 
+// export default 
+import m1 ,{title as test_title, debug} from './test.js'   // export 暴露的只能用花括号的形式来导入  多个的话就在花括号中继续添加
+// 使用 export导出的成员 如果想改名可以使用 as 来起别名
+console.log(m1.name)
+console.log(test_title)
+console.log(debug)
