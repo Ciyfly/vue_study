@@ -6,6 +6,10 @@
         <mt-button type="default" icon="back" @click="show">default</mt-button>
         <!-- http://mint-ui.github.io/docs/#/zh-cn2/button 这里可以看到 想设置直接写属性就可以 -->
 
+        <button type="button" class="mui-btn mui-btn-royal">
+            紫色
+        </button>
+
         <router-link to="/account">Accont</router-link>
         <router-link to="/goodslist">Goodslist</router-link>
 

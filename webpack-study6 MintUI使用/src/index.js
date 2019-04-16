@@ -16,6 +16,8 @@ import 'mint-ui/lib/style.css'
 Vue.use(MintUI) // 把所有的组件注册为全局的组件
 
 
+import './lib/mui/css/mui.css'
+
 
 import app from './components/App.vue'
 
