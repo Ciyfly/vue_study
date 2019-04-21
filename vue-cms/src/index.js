@@ -16,6 +16,18 @@ import { Header  } from 'mint-ui'
 
 Vue.component(Header.name, Header )
 
+// 轮播图
+import { Swipe, SwipeItem } from 'mint-ui';
+
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
+
+// 使用vue-resource引入图片
+
+import VueResource from 'vue-resource'
+
+Vue.use(VueResource)
+
 import Vue from 'vue'
 
 import app from './App.vue'

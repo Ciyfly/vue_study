@@ -14,4 +14,13 @@
 ## 设置路由高亮
 这里在 router.js里 routers下再加一个 linkActiveClass 然后指定router-link 选择样式为 muui的选择样式
 
+## 制作首页轮播图布局
+
+
+## 加载首页轮播图数据
+
+1. 获取数据, 如何获取, 使用 vue-resource
+2. 使用 vue-resource 的 this.$http.get 获取数据
+3. 获取到的数据要保存到 this.data身上
+4. 使用 v-for 循环渲染每个 item项
 
