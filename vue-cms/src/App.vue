@@ -4,7 +4,10 @@
     <!-- 顶部 Header区域 -->
 <mt-header fixed title="我的vue项目"></mt-header>
     <!-- 中间的路由 router-view区域 -->
-	<router-view></router-view>
+	<!-- 这里为了动画效果 --> 
+	<transition>
+		<router-view></router-view>
+	</transition>
     <!-- 底部Tabber区域 -->
     <!-- 这里使用MUI的底部样式 -->
     <nav class="mui-bar mui-bar-tab">
@@ -39,7 +42,23 @@
 
 .app-container{
     padding-top: 40px;
-
+	overflow-x: hidden;
 }
+
+.v-enter{   // 切换的时候进入的那个
+	transform: translateX(100%)
+}
+.v-leave-to{ // 切换的离开的那个
+	opacity: 0;
+	transform: translateX(-100%);
+	position: absolute;
+}
+
+.v-enter-active,
+.v-leave-active{
+	transition: all 0.5s ease;
+}
+
+
 </style>
 
