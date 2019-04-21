@@ -8,6 +8,7 @@ import SearchContainer from './components/tabbr/SearchContainer.vue'
 
 var router = new VueRouter({
     routes:[
+        {path:'/', component:HomeContainer},
         {path:'/home', component:HomeContainer},
         {path:'/member', component:MemberContainer},
         {path:'/shopcar', component:ShopcarContainer},
