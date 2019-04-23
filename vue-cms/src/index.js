@@ -28,6 +28,11 @@ import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
 
+// 设置请求的根路径
+Vue.http.options.root  = "http://www.liulongbin.top:3005/"
+// 全局设置 post时候表单数据格式
+Vue.http.options.emulateJSON = true;
+
 
 // 定义全局的过滤器  格式化时间
 

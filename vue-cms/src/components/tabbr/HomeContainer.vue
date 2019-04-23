@@ -55,7 +55,7 @@ export default{
     },
     methods: {
         getLubotu(){//获取轮播图数据
-            this.$http.get('http://www.liulongbin.top:3005/api/getlunbo').then(result=>{
+            this.$http.get('api/getlunbo').then(result=>{
                 // console.log(result)
                 if (result.body.status ==0){
                     this.lunbotuList = result.body.message;

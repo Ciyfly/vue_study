@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         getnewsinfo(){
-            this.$http.get("http://www.liulongbin.top:3005/api/getnew/"+ this.id).then(result=>{
+            this.$http.get("api/getnew/"+ this.id).then(result=>{
                 if (result.body.status == 0){
                     this.newsinfo = result.body.message[0]
                     console.log(result.body.message)
