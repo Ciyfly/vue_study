@@ -9,11 +9,16 @@
 
        <div class="content" v-html="newsinfo.content">
 
+           
+       
        </div>
-    
+    <comment-box :id="this.id"></comment-box>
    </div>
 </template>
 <script>
+
+import Comment from '../subcomponents/Comment.vue'
+
 export default {
     data() {
         return {
@@ -34,6 +39,9 @@ export default {
             })
         }
     },
+    components:{
+        'comment-box':Comment
+    }
 }
 </script>
 <style lang="scss" >
