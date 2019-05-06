@@ -60,6 +60,9 @@
 	transition: all 0.5s ease;
 }
 
+.mint-header{
+	z-index: 99;
+}
 
 </style>
 

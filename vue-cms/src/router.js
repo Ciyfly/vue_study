@@ -9,12 +9,15 @@ import SearchContainer from './components/tabbr/SearchContainer.vue'
 import NewsList from './components/news/NewsList.vue'
 import NewsInfo from './components/news/NewsInfo.vue'
 
+// photos
+import PhotoList from './components/photos/PhotoList.vue'
 var router = new VueRouter({
     routes:[
         {path:'/', component:HomeContainer},
         {path:'/home', component:HomeContainer},
         {path:'/home/newslist', component:NewsList},
         {path:'/home/newsinfo/:id', component:NewsInfo},
+        {path:'/home/photolist', component:PhotoList},
         {path:'/member', component:MemberContainer},
         {path:'/shopcar', component:ShopcarContainer},
         {path:'/search', component:SearchContainer},

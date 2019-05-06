@@ -72,4 +72,53 @@
 
 + 这里发表后手动写一个数据插入到列表中 这里插入到开头
 
+## 改造图片分析 按钮为 路由的链接并显示对于的组件页面
 
+## 绘制图片列表 组件页面结构并美化样式
+1. 制作 顶部的滑动条 MUI中 
+2. 制作底部的图片列表
+
+### 制作顶部滑动条的坑
+1. 借助于 MUI 中的 tab-top-webview-main.html
+2. 需要把 slider 区域的 mui-fullscreen 类去掉
+3. 滑动条无法正常触发滑动 通过检查官方文档 发现是一个js组件, 需要被初始化一下:
+   + 导入 mui.js
+   + 调用官方提供的方式去初始化
+   ```
+   mui('.mui-scroll-wrapper').scroll({
+	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+});
+   ```
+4. 我们在初始化滑动条的时候 导入的mui 但是控制台报错
+是因为 mui里面没有使用严格模式的写法 但是 webpack打包是使用严格模式的
+
++ 解决方案: 1. 把mui.js中的非严格模式的代码改掉
+           2. 把 webpack的严格模式禁用掉
+
+### webpack移除严格模式
+```
+npm install babel-plugin-transform-remove-strict-mode
+
+.babelrc 文件添加配置
+
+{
+    "plugins": ["transform-remove-strict-mode"]
+}
+```
+5. 刚进入 图片分享页面的时候 滑动条无法正常工作 
+必须等 DOM元素加载完 所以我们把初始化滑动条 放到 mouted里面来初始化
+这个时候元素已经加载完毕了
+
+7. 获取图片所有分类
+
+### 制作图片列表区域
+
+1. 使用懒加载
+
+```
+import { Lazyload } from 'mint-ui';
+
+Vue.use(Lazyload);
+
+```
+2. 加载成功渲染数据

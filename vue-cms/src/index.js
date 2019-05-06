@@ -24,6 +24,12 @@ Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Button.name, Button);
 // 使用vue-resource引入图片
 
+// 懒加载 这里要成功必须全部导入
+
+import MintUI from 'mint-ui'
+Vue.use(MintUI);
+import 'mint-ui/lib/style.css'
+
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
