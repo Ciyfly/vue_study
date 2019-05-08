@@ -16,7 +16,7 @@
             <!-- 底部图片列表 -->
 
 			<ul class="photo-list">
-				<li v-for="item in list" :key="item.id">
+				<router-link :to="'/home/photoinfo/' + item.id" v-for="item in list" :key="item.id" tag="li">
 					<img v-lazy="item.img_url">
 					<div class="info">
 						<div class="info-title">
@@ -26,7 +26,7 @@
 							</div>
 						</div>
 					</div>
-				</li>
+				</router-link>
 			</ul>
         </div>
 </template>

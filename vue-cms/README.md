@@ -122,3 +122,9 @@ Vue.use(Lazyload);
 
 ```
 2. 加载成功渲染数据
+
+## 这里详情将 li改为 router-link的时候 tag指定为 li 这样可以恢复样式
+
+## 缩略图用的插件 vue-preview
+获取数据后得自己再改造下数据 有 w h属性
+新版的需要 item.msrc = item.src 这样才可以显示成功
