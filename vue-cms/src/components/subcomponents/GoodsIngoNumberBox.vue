@@ -17,7 +17,7 @@ export default {
     },
     mounted() {
         // 初始化数组选择框组件
-        mui('mui-numbox').numbox();
+        mui('.mui-numbox').numbox();
 
     },
 }
