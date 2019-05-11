@@ -1,6 +1,9 @@
 <template>
     <div class="goods-list">
-        <div class="goods-item" v-for="item in goodslist" :key="item.id">
+        <!-- 在网页中有两种跳转方式 1. a 标签跳转
+            2. 使用 windows.location.href 编程式跳转
+        -->
+        <router-link :to="'/home/goodsinfo/'+item.id" class="goods-item" v-for="item in goodslist" :key="item.id">
         <img :src="item.img_url" alt="">
         <h1 class="title">{{item.title}}</h1>
             <div class="info">
@@ -13,7 +16,7 @@
                     <span>剩余{{item.stock_quantity}}件</span>
                 </p>
             </div>
-        </div>
+        </router-link>
         <mt-button type="danger" size="large" @click="getMore">加载更多</mt-button>
     </div>
 </template>
