@@ -135,3 +135,10 @@ Vue.use(Lazyload);
 ## 尝试在手机上 去进行项目的预览和测试
 手机和开发项目的电脑处于同一个wifi中
 package.json --host 0.0.0.0
+
+
+## vuex
+
+vuex 是 vue 管理公共数据的工具, 方便各种组件获取公共数据
+
+const store = new Vuex.Store()
