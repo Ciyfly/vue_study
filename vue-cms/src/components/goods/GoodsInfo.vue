@@ -107,6 +107,16 @@ export default {
             
             // 添加购物车
             this.ballFlag = !this.ballFlag;
+            var goodsinfo = { // 保存 store
+                            id: this.id,
+                            count: this.selectedCount,
+                            price: this.goodsinfo.sell_price,
+                            selected: true
+                            }
+            // 调用 加入购物车
+            this.$store.commit('addToCar', goodsinfo);
+            // 更新后 存储到 localStorage里
+            
         },
         beforeEnter(el){// 设置小球样式
             el.style.transform="translate(0, 0)";
