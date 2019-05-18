@@ -93,6 +93,16 @@ var store = new Vuex.Store({
                 }
             })
             localStorage.setItem('car', JSON.stringify(state.car))
+        },
+        updateGoodsSelected(state, info){
+            // 更新商品选择状态
+            state.car.some(item=>{
+                if(item.id == info.id){
+                    item.selected = info.selected;
+                }
+            })
+            // 最后要更新到 localStoreage才行  不然刷新就没了。所以用的 每次属性都从里面读取的
+            localStorage.setItem('car', JSON.stringify(state.car))
         }
     },
     getters:{ // this.$store.getter.方法
@@ -110,6 +120,13 @@ var store = new Vuex.Store({
                 o[item.id] = item.count;
             })
             return o;
+        },
+        getGoodsSelected(state){
+            var selecteds ={}
+            state.car.forEach(item=>{
+                selecteds[item.id] = item.selected
+            })
+            return selecteds;
         }
     }
 })
